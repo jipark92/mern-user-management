@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.new-users-form-container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100vw;
+}
+
+.form-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    height: 25%;
+}
+
+.form-container div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.form-container div:nth-child(3){
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+
+    width: 100%;
+}
+
+h3{
+    text-align: center;
+}
+
+table,th,td{
+    border: 1px solid black;
+    padding: 0.5rem;
+}
+

@@ -3,3 +3,48 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.main-container{
+  /* border: 5px solid red; */
+}
+
+.title-container{
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.users-container{
+  /* border: 5px solid green; */
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.new-user-container{
+  width: 75%;
+}
+
+.new-user-btn {
+  padding: 0.5rem;
+}
+
+.users-info-container{
+  border: 1px solid black;
+  width: 75%;
+  height: 50%;
+  /* padding: 0.5rem; */
+}
+
+.labels-container{
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0.5rem;
+}
+
+.labels-container p {
+  margin: 0;
+}

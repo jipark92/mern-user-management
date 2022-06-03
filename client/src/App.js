@@ -1,9 +1,10 @@
+import RouterSwitch from "./RouterSwitch";
 
 function App() {
   return (
-    <div className="App">
-
-    </div>
+    <main className="main-container">
+      <RouterSwitch/>
+    </main>
   );
 }
 

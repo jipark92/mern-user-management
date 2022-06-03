@@ -36,4 +36,9 @@ app.delete('/deleteuser/:id', async (req,res)=>{
     await UserModel.findByIdAndRemove(id).exec()
 })
 
+//update
+app.put('/updateuser/:id', async(req,res)=>{
+    
+})
+
 app.listen(3001,()=>{console.log('connect to port 3001')})

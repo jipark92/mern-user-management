@@ -29,7 +29,6 @@ export default function NewUserPage() {
                 <form className='form-container bg-dark text-light'>
                     <div>
                         <h3>Add New User Form</h3>
-                        <p>User Deleted</p>
                     </div>
                     <div>
                         <label htmlFor="name">Name</label>
@@ -71,6 +70,7 @@ export default function NewUserPage() {
                         </Link>
                     </div>
                 </form>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#273036" fill-opacity="1" d="M0,256L48,218.7C96,181,192,107,288,96C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
             </div>
     )
 }

@@ -4,9 +4,8 @@
   box-sizing: border-box;
 }
 
-
 .main-container{
-  /* border: 5px solid red; */
+
 }
 
 .title-container{
@@ -15,20 +14,21 @@
 }
 
 .users-container{
-  height: 50vh;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+
+  height: 100vh;
 }
 
 .new-user-container{
   display:flex;
   justify-content: space-between;
   align-items: center;
+
   width: 100%;
+  padding: 5rem;
 }
 
 .new-user-btn {

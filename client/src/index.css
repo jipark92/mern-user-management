@@ -9,6 +9,7 @@
 }
 
 .title-container{
+  width: 100%;
   text-align: center;
   padding: 0.5rem;
 }
@@ -19,7 +20,8 @@
   justify-content: space-between;
   align-items: center;
 
-  height: 100vh;
+  min-height: 100vh;
+  /* overflow-y: auto; */
 }
 
 .new-user-container{
@@ -53,4 +55,12 @@
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+.footer-bg{
+  z-index: -1;
 }

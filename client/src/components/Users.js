@@ -18,7 +18,17 @@ export default function Users() {
         Axios.get(`http://localhost:3001/`)
         .then(res=>{
             setUserDatas(res.data)
+            if(res.data.length > userDatas.length){
+                setAddStatus(true)
+                setTimeout(() => {
+                    setAddStatus(false)
+                }, 1500);
+            }
         })
+        .catch(()=>{
+            alert('error fetching data')
+        })
+        
     },[userDatas])
 
     const deleteBtn = (id) => {
@@ -27,7 +37,7 @@ export default function Users() {
         setDeleteStatus(true)
         setTimeout(() => {
             setDeleteStatus(false)
-        }, 2500);
+        }, 1500);
     }
 
     const updateBtn = () => {
@@ -45,8 +55,10 @@ export default function Users() {
                 <td>{users.gender}</td>                            
                 <td>{users.status}</td>
                 <td style={{display:'flex', justifyContent:'space-evenly'}}>
-                    <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></li>
-                    <li className='update-btn' onClick={()=>{updateBtn(users._id)}}><FaEdit /></li>
+                    <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}} ><RiDeleteBin5Line /></li>
+                    <Link to='/updateuser' style={{textDecoration:"none",color:"rgb(117,119,122)"}}>
+                        <li className='update-btn'><FaEdit /></li>
+                    </Link>
                 </td>
             </tr>
         )
@@ -65,7 +77,7 @@ export default function Users() {
                             <th>PHONE<AiOutlinePhone/></th>
                             <th>GENDER<TbGenderBigender/></th>
                             <th>STATUS<HiStatusOnline/></th>
-                            <th>DELETE<AiOutlineInteraction/></th>
+                            <th>ACTION<AiOutlineInteraction/></th>
                         </tr>
                         {renderUsersDatas}
                     </tbody>
@@ -79,7 +91,7 @@ export default function Users() {
                     {updateStatus ? <p style={{color:"blue",fontSize:"1.1rem", fontWeight:"700"}}>USER UPDATED</p>: ""}
                 </div>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#273036" fill-opacity="1" d="M0,256L48,218.7C96,181,192,107,288,96C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+            <svg className='footer-bg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#273036" fillOpacity="1" d="M0,256L48,218.7C96,181,192,107,288,96C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
         </div>
     )
 }

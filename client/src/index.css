@@ -33,16 +33,13 @@
 }
 
 .users-info-container{
-  /* border: 1px solid black; */
   width: 75%;
   height: 50%;
-  /* padding: 0.5rem; */
 }
 
 .labels-container{
   padding: 0.5rem;
   width: 100%;
-  border: 1px solid black;
 }
 
 .labels-container p {
@@ -52,19 +49,6 @@
 .user-info{
   display: flex;
   justify-content: space-between;
-  border: 1px solid red;
   padding: 0.5rem;
 }
 
-.action-btn-container{
-  display:flex;
-  gap: 0.5rem;
-}
-
-.action-btn-container button{
-  border: none;
-}
-
-.delete-btn {
-  background: none;
-}

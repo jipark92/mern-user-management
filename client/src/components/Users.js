@@ -18,6 +18,8 @@ export default function Users() {
     const deleteBtn = (id) => {
         console.log('clicked delete')
         Axios.delete(`http://localhost:3001/deleteuser/${id}`)
+        alert('user deleted')
+
     }
 
     const updateBtn = () => {
@@ -30,11 +32,13 @@ export default function Users() {
                 <td>{users._id}</td>
                 <td>{users.name}</td>
                 <td>{users.email}</td>
+                <td>{users.age}</td>
+                <td>{users.phone}</td>
                 <td>{users.gender}</td>                            
                 <td>{users.status}</td>
-                <td className='action-btn-container'>
-                    <button className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></button>
-                    <button className='update-btn' onClick={()=>{updateBtn(users._id)}}><FaEdit /></button>
+                <td style={{textAlign:"center"}}>
+                    <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></li>
+                    <li className='update-btn' onClick={()=>{updateBtn(users._id)}}><FaEdit /></li>
                 </td>
             </tr>
         )
@@ -54,9 +58,11 @@ export default function Users() {
                             <th>ID</th>
                             <th>NAME</th>
                             <th>EMAIL</th>
+                            <th>AGE</th>
+                            <th>PHONE</th>
                             <th>GENDER</th>
                             <th>STATUS</th>
-                            <th>Action</th>
+                            <th>DELETE</th>
                         </tr>
                         {renderUsersDatas}
                     </tbody>

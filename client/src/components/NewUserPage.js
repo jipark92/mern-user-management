@@ -11,11 +11,15 @@ export default function NewUserPage() {
     const [userEmail, setUserEmail] = useState("")
     const [userGender, setUserGender] = useState("Male")
     const [userStatus, setUserStatus ] = useState("Active")
+    const [userAge, setUserAge] = useState()
+    const [userPhone, setUserPhone] = useState()
 
     const addNewUser = () => {
         Axios.post(`http://localhost:3001/newuser`,{
             name: userName,
             email: userEmail,
+            age: userAge,
+            phone: userPhone,
             gender: userGender,
             status: userStatus
         })
@@ -30,6 +34,10 @@ export default function NewUserPage() {
                         <input type="text" name='name' id='name' onChange={(e)=>setUserName(e.target.value)} required/>
                         <label htmlFor="email">Email</label>
                         <input type="email" name='email' id='email' onChange={(e)=>setUserEmail(e.target.value)} required/>
+                        <label htmlFor="age">Age</label>
+                        <input type='number' name='age' id='age' onChange={(e)=>{setUserAge(e.target.value)}} maxLength="3" required/>
+                        <label htmlFor="phone">Phone</label>
+                        <input type='number' name='phone' id='phone' onChange={(e)=>{setUserPhone(e.target.value)}} maxLength="10" required/>
                     </div>
                     <div>
                         <label htmlFor="gender">Gender</label>
@@ -43,15 +51,17 @@ export default function NewUserPage() {
                             <option value="Inactive">Inactive</option>
                         </select>
                     </div>
-                    <button className="bg-dark text-light" onClick={(e)=>{
-                        if(!userName || !userEmail)return
-                        e.preventDefault()
-                        addNewUser()
-                        navigate('/')
-                    }}>Add User</button>
-                    <Link to='/'  className="d-grid">
-                        <button className="home bg-dark text-light">Go Back</button>
-                    </Link>
+                    <div className='d-grid'>
+                        <button className="bg-dark text-light" onClick={(e)=>{
+                            if(!userName || !userEmail || !userAge || !userPhone)return
+                            e.preventDefault()
+                            addNewUser()
+                            navigate('/')
+                        }}>Add User</button>
+                        <Link to='/'  className="d-grid">
+                            <button className="home bg-dark text-light">Go Back</button>
+                        </Link>
+                    </div>
                 </form>
             </div>
     )

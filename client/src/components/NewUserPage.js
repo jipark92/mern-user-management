@@ -1,5 +1,4 @@
 import { Link , useNavigate} from 'react-router-dom'
-
 import Axios from 'axios'
 import {useState} from 'react'
 
@@ -27,17 +26,26 @@ export default function NewUserPage() {
 
     return (
             <div className="new-users-form-container">
-                <form className='form-container'>
-                    <h3>Add New User Form</h3>
+                <form className='form-container bg-dark text-light'>
+                    <div>
+                        <h3>Add New User Form</h3>
+                        <p>User Deleted</p>
+                    </div>
                     <div>
                         <label htmlFor="name">Name</label>
                         <input type="text" name='name' id='name' onChange={(e)=>setUserName(e.target.value)} required/>
                         <label htmlFor="email">Email</label>
                         <input type="email" name='email' id='email' onChange={(e)=>setUserEmail(e.target.value)} required/>
                         <label htmlFor="age">Age</label>
-                        <input type='number' name='age' id='age' onChange={(e)=>{setUserAge(e.target.value)}} maxLength="3" required/>
+                        <input type='number' name='age' id='age' onChange={(e)=>{
+                            setUserAge(e.target.value)
+                            if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength)
+                            }} maxLength="3" required/>
                         <label htmlFor="phone">Phone</label>
-                        <input type='number' name='phone' id='phone' onChange={(e)=>{setUserPhone(e.target.value)}} maxLength="10" required/>
+                        <input type='number' name='phone' id='phone' maxLength="10"  onChange={(e)=>{
+                            setUserPhone(e.target.value)
+                            if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength)
+                            }} required/>
                     </div>
                     <div>
                         <label htmlFor="gender">Gender</label>
@@ -52,14 +60,14 @@ export default function NewUserPage() {
                         </select>
                     </div>
                     <div className='d-grid'>
-                        <button className="bg-dark text-light" onClick={(e)=>{
+                        <button className="bg-light text-dark" onClick={(e)=>{
                             if(!userName || !userEmail || !userAge || !userPhone)return
                             e.preventDefault()
                             addNewUser()
                             navigate('/')
                         }}>Add User</button>
                         <Link to='/'  className="d-grid">
-                            <button className="home bg-dark text-light">Go Back</button>
+                            <button className="home bg-light text-dark">Go Back</button>
                         </Link>
                     </div>
                 </form>

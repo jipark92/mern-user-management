@@ -21,4 +21,11 @@ app.get('/', async(req,res)=>{
     })
 })
 
-app.listen(3001,()=>{console.log('connect to port 3000')})
+app.post('/newuser', async (req,res)=>{
+    const addNewUser = req.body
+    const newUser = new UserModel(addNewUser)
+    await newUser.save()
+    res.json(addNewUser)
+})
+
+app.listen(3001,()=>{console.log('connect to port 3001')})

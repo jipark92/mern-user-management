@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
 
 export default function Users() {
 
@@ -10,9 +12,17 @@ export default function Users() {
         Axios.get(`http://localhost:3001/`)
         .then(res=>{
             setUserDatas(res.data)
-            console.log(res.data)
         })
-    },[])
+    },[userDatas])
+
+    const deleteBtn = (id) => {
+        console.log('clicked delete')
+        Axios.delete(`http://localhost:3001/deleteuser/${id}`)
+    }
+
+    const updateBtn = () => {
+        console.log('clicked update')
+    }
 
     const renderUsersDatas = userDatas.map((users,i)=>{
         return (
@@ -22,6 +32,10 @@ export default function Users() {
                 <td>{users.email}</td>
                 <td>{users.gender}</td>                            
                 <td>{users.status}</td>
+                <td className='action-btn-container'>
+                    <button className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></button>
+                    <button className='update-btn' onClick={()=>{updateBtn(users._id)}}><FaEdit /></button>
+                </td>
             </tr>
         )
     })
@@ -42,6 +56,7 @@ export default function Users() {
                             <th>EMAIL</th>
                             <th>GENDER</th>
                             <th>STATUS</th>
+                            <th>Action</th>
                         </tr>
                         {renderUsersDatas}
                     </tbody>

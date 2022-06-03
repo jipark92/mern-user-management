@@ -55,3 +55,16 @@
   border: 1px solid red;
   padding: 0.5rem;
 }
+
+.action-btn-container{
+  display:flex;
+  gap: 0.5rem;
+}
+
+.action-btn-container button{
+  border: none;
+}
+
+.delete-btn {
+  background: none;
+}

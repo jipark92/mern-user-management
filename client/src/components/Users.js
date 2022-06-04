@@ -16,11 +16,11 @@ export default function Users() {
     const [updateStatus, setUpdateStatus] = useState(false)
 
     const [isLoading, setIsLoading] = useState(true)
-    const [showEdit , setShowEdit] = useState(false)
+    // const [showEdit , setShowEdit] = useState(false)
 
-    const handleClose = () => {
-        setShowEdit(false)
-    }
+    // const handleClose = () => {
+    //     setShowEdit(false)
+    // }
 
     useEffect(()=>{
         Axios.get(`http://localhost:3001/`)
@@ -49,13 +49,21 @@ export default function Users() {
         }, 1500);
     }
 
-    const updateBtn = () => {
+    const updateBtn = (id) => {
         console.log('clicked update')
+        const newName = prompt('enter new name')
+        console.log(newName)
+
+        Axios.put('http://localhost:3001/updateuser',{
+            id: id,
+            newName: newName,
+        })
+        .then(res=>console.log('blah'))
     }
 
     const renderUsersDatas = userDatas.map((users,i)=>{
         return (
-            <tr key={i}>
+            <tr key={users._id}>
                 <td>{users._id}</td>
                 <td>{users.name}</td>
                 <td>{users.email}</td>
@@ -65,13 +73,8 @@ export default function Users() {
                 <td>{users.status}</td>
                 <td style={{display:'flex', justifyContent:'space-evenly'}}>
                     <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}} ><RiDeleteBin5Line /></li>
-                    {/* <Link to='/updateuser' style={{textDecoration:"none",color:"rgb(117,119,122)"}}> */}
-                    <li className='update-btn' onClick={()=>setShowEdit(true)}><FaEdit /></li>
-                    {showEdit?<UpdateUser 
-                        handleClose={handleClose}
-                        name={users.name}
-
-                        />:""}
+                    {/* <Link to={`/updateuser/`} style={{textDecoration:"none",color:"rgb(117,119,122)"}}> */}
+                    <li className='update-btn' onClick={()=>{updateBtn(users._id)}} ><FaEdit /></li>
                     {/* </Link> */}
                 </td>
             </tr>
@@ -93,7 +96,7 @@ export default function Users() {
                             <th>STATUS<HiStatusOnline/></th>
                             <th>ACTION<AiOutlineInteraction/></th>
                         </tr>
-                        {isLoading? <tr className='loading-container'><AiOutlineLoading3Quarters className='loading-icon' /></tr>:renderUsersDatas}
+                        {isLoading? <tr className='loading-container'><td><AiOutlineLoading3Quarters className='loading-icon' /></td></tr>:renderUsersDatas}
                     </tbody>
                 </table>
                 <div className="new-user-container">
@@ -105,10 +108,7 @@ export default function Users() {
                     {updateStatus ? <p style={{color:"blue",fontSize:"1.1rem", fontWeight:"700"}}>USER UPDATED</p>: ""}
                 </div>
             </div>
-            {/* <footer>
-                
-            </footer> */}
-            {/* <svg className='footer-bg' xmlns="http://www.w3.org/2000/svg" viewBox="200 25 900 220"><path fill="#273036" fillOpacity="1" d="M0,256L48,218.7C96,181,192,107,288,96C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg> */}
+            <svg className='footer-bg' xmlns="http://www.w3.org/2000/svg" viewBox="200 25 900 220"><path fill="#273036" fillOpacity="1" d="M0,256L48,218.7C96,181,192,107,288,96C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
         </div>
     )
 }

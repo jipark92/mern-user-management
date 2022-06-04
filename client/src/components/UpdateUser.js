@@ -1,8 +1,11 @@
 import { Button, Form } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import {useState , useEffect} from 'react'
+import Axios from 'axios'
 
 export default function UpdateUser(props) {
+
+
 
     const [updateName, setUpdateName ] = useState('')
     const [updateEmail, setUpdateEmail ] = useState('')
@@ -46,16 +49,13 @@ export default function UpdateUser(props) {
                             e.preventDefault()
                             updateUser()
                         }}>Submit</Button>
-                        {/* <Link to='/' className='d-grid'> */}
+                        <Link to='/' className='d-grid'>
                             <Button variant="primary" onClick={props.handleClose}>CLOSE</Button>
-                        {/* </Link> */}
+                        </Link>
                     </div>
                 </Form>
             </div>
-            <footer>
-                
-            </footer>
-            {/* <svg className='footer-bg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1340 320"><path fill="#273036" fillOpacity="1" d="M0,256L48,218.7C96,181,192,107,288,96C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg> */}
+            <svg className='footer-bg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1340 320"><path fill="#273036" fillOpacity="1" d="M0,256L48,218.7C96,181,192,107,288,96C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
         </div>
     )
 }

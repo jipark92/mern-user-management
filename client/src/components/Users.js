@@ -50,10 +50,17 @@ export default function Users() {
     const updateBtn = (id) => {
         console.log('clicked update')
         const newName = prompt('enter new name')
-        if(!newName) return
+        const newEmail = prompt('enter new email')
+        const newAge = prompt('enter new age')
+        const newPhone = prompt('enter new phone')
+
+        if(!newName || !newEmail || !newAge || !newPhone) return
         Axios.put('http://localhost:3001/updateuser',{
             id: id,
             newName: newName,
+            newEmail: newEmail,
+            newAge: newAge,
+            newPhone: newPhone
         })
     }
 

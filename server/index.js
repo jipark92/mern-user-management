@@ -39,10 +39,20 @@ app.delete('/deleteuser/:id', async (req,res)=>{
 //update
 app.put('/updateuser',(req,res)=>{    
     const newName = req.body.newName
+    const newEmail = req.body.newEmail
+    const newAge = req.body.newAge
+    const newPhone = req.body.newPhone
+
+
     const id = req.body.id
+
     try {
             UserModel.findById(id,(err,singleUser)=>{
             singleUser.name = newName
+            singleUser.email = newEmail
+            singleUser.age = newAge
+            singleUser.phone = newPhone
+
             singleUser.save()
         })
     } catch (error) {

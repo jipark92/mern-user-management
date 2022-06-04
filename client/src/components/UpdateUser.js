@@ -1,11 +1,9 @@
 import { Button, Form } from 'react-bootstrap';
-import {Link, useParams} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {useState , useEffect} from 'react'
 import Axios from 'axios'
 
 export default function UpdateUser(props) {
-
-
 
     const [updateName, setUpdateName ] = useState('')
     const [updateEmail, setUpdateEmail ] = useState('')
@@ -14,20 +12,47 @@ export default function UpdateUser(props) {
     const [updateGender, setUpdateGender ] = useState('')
     const [updateStatus, setUpdateStatus ] = useState('')
 
+    const [userDatas, setUserDatas] = useState([])
 
-    // console.log(props.handleClose)
 
     const updateUser = () => {
         console.log('clicked update user')
     }
 
+    useEffect(()=>{
+        Axios.get(`http://localhost:3001/`)
+        .then(res=>{
+            setUserDatas(res.data)
+        })
+        .catch(()=>{
+            alert('error fetching data')
+        })
+        
+    },[])
+
+    const userSelection = userDatas.map((user,i)=>{
+        // console.log(userDatas)
+        return (
+                <option key={i} id={user._id} value={user.name} onClick={()=>{
+                    setUpdateName(user.name)
+                }}>{user.name}</option>
+        )
+    })
+
     return (
         <div className="update-user-container">
             <div className='update-form-container bg-dark text-light'>
                 <h3>Update User Form</h3>
+                <h4 style={{color:"red"}}>Select User</h4>
+                <select>
+                    {userSelection}
+                </select>
                 <Form className='update-form'>
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" value={props.name}/>
+                    <Form.Control type="text" value={updateName} onChange={(e)=>{
+                        setUpdateName(e.target.value)
+                        console.log(updateName)
+                        }}/>
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email"/>
                     <Form.Label>Age</Form.Label>

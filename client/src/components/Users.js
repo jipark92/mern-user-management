@@ -6,7 +6,7 @@ import { AiOutlineUser,AiOutlineMail, AiOutlinePhone,AiOutlineInteraction,AiOutl
 import { TbListNumbers,TbGenderBigender } from "react-icons/tb";
 import { HiStatusOnline, HiOutlineIdentification } from "react-icons/hi";
 import { FaEdit } from "react-icons/fa";
-import UpdateUser from './UpdateUser';
+import UpdateModal from './UpdateModal';
 
 export default function Users() {
 
@@ -16,11 +16,9 @@ export default function Users() {
     const [updateStatus, setUpdateStatus] = useState(false)
 
     const [isLoading, setIsLoading] = useState(true)
-    // const [showEdit , setShowEdit] = useState(false)
 
-    // const handleClose = () => {
-    //     setShowEdit(false)
-    // }
+    const [show , setShow] = useState(false)
+    // const [newName, setNewName] = useState('')
 
     useEffect(()=>{
         Axios.get(`http://localhost:3001/`)
@@ -52,13 +50,15 @@ export default function Users() {
     const updateBtn = (id) => {
         console.log('clicked update')
         const newName = prompt('enter new name')
-        console.log(newName)
-
+        if(!newName) return
         Axios.put('http://localhost:3001/updateuser',{
             id: id,
             newName: newName,
         })
-        .then(res=>console.log('blah'))
+    }
+
+    const handleClose = () =>{
+        setShow(false)
     }
 
     const renderUsersDatas = userDatas.map((users,i)=>{
@@ -74,8 +74,13 @@ export default function Users() {
                 <td style={{display:'flex', justifyContent:'space-evenly'}}>
                     <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}} ><RiDeleteBin5Line /></li>
                     {/* <Link to={`/updateuser/`} style={{textDecoration:"none",color:"rgb(117,119,122)"}}> */}
-                    <li className='update-btn' onClick={()=>{updateBtn(users._id)}} ><FaEdit /></li>
+                    <li className='update-btn' onClick={()=>{updateBtn(users._id)}} ><FaEdit/></li>
                     {/* </Link> */}
+                    {/* <li className='update-btn' onClick={()=>{setShow(true)}} ><FaEdit/></li>
+                    {show? <UpdateModal
+                    handleClose={handleClose}
+                    userId={users._id}
+                />:""} */}
                 </td>
             </tr>
         )
@@ -84,6 +89,7 @@ export default function Users() {
     return (
         <div className="users-container">
             <div className="users-info-container">
+            
                 <table style={{width: "100%"}}>
                     <tbody>
                         <tr className='bg-dark text-light'>

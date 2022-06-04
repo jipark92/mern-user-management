@@ -37,8 +37,17 @@ app.delete('/deleteuser/:id', async (req,res)=>{
 })
 
 //update
-app.put('/updateuser/:id', async(req,res)=>{
-    
+app.put('/updateuser',(req,res)=>{    
+    const newName = req.body.newName
+    const id = req.body.id
+    try {
+            UserModel.findById(id,(err,singleUser)=>{
+            singleUser.name = newName
+            singleUser.save()
+        })
+    } catch (error) {
+        console.log('error')
+    }
 })
 
-app.listen(3001,()=>{console.log('connect to port 3001')})
+app.listen(process.env.PORT || 3001,()=>{console.log('connect to port 3001')})

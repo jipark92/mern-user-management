@@ -58,15 +58,15 @@ export default function AddUser() {
                             <option value="Inactive">Inactive</option>
                         </select>
                     </div>
-                    <div className='d-grid'>
-                        <button className="bg-light text-dark" onClick={(e)=>{
+                    <div className=''>
+                        <button className="add-user-btn" onClick={(e)=>{
                             if(!userName || !userEmail || !userAge || !userPhone)return
                             e.preventDefault()
                             addNewUser()
                             navigate('/')
                         }}>Add User</button>
                         <Link to='/'  className="d-grid">
-                            <button className="home bg-light text-dark">Go Back</button>
+                            <button className="home-btn">Go Back</button>
                         </Link>
                     </div>
                 </form>

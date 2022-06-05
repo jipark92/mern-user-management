@@ -21,6 +21,8 @@ export default function Users() {
     const [show , setShow] = useState(false)
     // const [newName, setNewName] = useState('')
 
+    const [rowDatas, setRowDatas] = useState([])
+
     useEffect(()=>{
         Axios.get(`http://localhost:3001/`)
         .then(res=>{
@@ -30,7 +32,7 @@ export default function Users() {
                 setAddStatus(true)
                 setTimeout(() => {
                     setAddStatus(false)
-                }, 1500);
+                }, 2500);
             }
         })
         .catch(()=>{
@@ -48,22 +50,27 @@ export default function Users() {
         }, 1500);
     }
 
-    const updateBtn = (id) => {
-        console.log('clicked update')
-        const newName = prompt('enter new name')
-        const newEmail = prompt('enter new email')
-        const newAge = prompt('enter new age')
-        const newPhone = prompt('enter new phone')
+    // const updateBtn = (id) => {
+    //     console.log('clicked update')
+    //     const newName = prompt('enter new name')
+    //     const newEmail = prompt('enter new email')
+    //     const newAge = prompt('enter new age')
+    //     const newPhone = prompt('enter new phone')
 
-        if(!newName || !newEmail || !newAge || !newPhone) return
-        Axios.put('http://localhost:3001/updateuser',{
-            id: id,
-            newName: newName,
-            newEmail: newEmail,
-            newAge: newAge,
-            newPhone: newPhone
-        })
-    }
+    //     if(!newName || !newEmail || !newAge || !newPhone) return
+    //     Axios.put('http://localhost:3001/updateuser',{
+    //         id: id,
+    //         newName: newName,
+    //         newEmail: newEmail,
+    //         newAge: newAge,
+    //         newPhone: newPhone
+    //     })
+    // } 
+
+    // const updateBtn = () =>{
+    //     console.log('update clicked')
+    //     console.log('')
+    // }
 
     const handleClose = () =>{
         setShow(false)
@@ -84,7 +91,10 @@ export default function Users() {
                     {/* <Link to={`/updateuser/`} style={{textDecoration:"none",color:"rgb(117,119,122)"}}> */}
                     {/* <li className='update-btn' onClick={()=>{updateBtn(users._id)}} ><FaEdit/></li> */}
                     {/* </Link> */}
-                    <li className='update-btn' onClick={()=>{setShow(true)}} ><FaEdit/></li>
+                    <li  onClick={()=>{
+                        setRowDatas(users)
+                        console.log(rowDatas)
+                        setShow(true)}} ><FaEdit/></li>
                     {/* <li className='update-btn' onClick={()=>{setShow(true)}} ><FaEdit/></li>
                     {show? <UpdateModal
                     handleClose={handleClose}
@@ -121,6 +131,8 @@ export default function Users() {
             </div>
             {show?<UpdateForm
                 handleClose={handleClose}
+                // handleUpdate={updateBtn}
+                rowDatas={rowDatas}
             />:""}
             
             <svg className='footer-bg' xmlns="http://www.w3.org/2000/svg" viewBox="200 25 900 220"><path fill="#273036" fillOpacity="1" d="M0,256L48,218.7C96,181,192,107,288,96C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>

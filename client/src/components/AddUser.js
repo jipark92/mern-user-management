@@ -58,7 +58,7 @@ export default function AddUser() {
                             <option value="Inactive">Inactive</option>
                         </select>
                     </div>
-                    <div className=''>
+                    <div className='d-grid'>
                         <button className="add-user-btn" onClick={(e)=>{
                             if(!userName || !userEmail || !userAge || !userPhone)return
                             e.preventDefault()

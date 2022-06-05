@@ -35,15 +35,18 @@ router.put('/updateuser',(req,res)=>{
     const newEmail = req.body.newEmail
     const newAge = req.body.newAge
     const newPhone = req.body.newPhone
+    const newGender = req.body.newGender
+    const newStatus = req.body.newStatus
     const id = req.body.id
 
     try {
             UserModel.findById(id,(err,singleUser)=>{
             singleUser.name = newName
             singleUser.email = newEmail
-            singleUser.age = newAge
-            singleUser.phone = newPhone
-
+            singleUser.age = Number(newAge)
+            singleUser.phone = Number(newPhone)
+            singleUser.gender = newGender
+            singleUser.status = newStatus
             singleUser.save()
         })
     } catch (error) {

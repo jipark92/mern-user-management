@@ -17,6 +17,14 @@
   background-color: rgb(39,48,54);
 }
 
+.title-container div{
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .users-container{
   display: flex;
   flex-direction: column;

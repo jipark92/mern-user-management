@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+}
+
+.search-user-btn {
+    border-radius: 10px;
+    background-color: rgb(39,48,54);
+    color: white;
+    padding: 1rem;
+    font-weight: 1000;
+    border: 2px solid rgb(13,110,253);
+}
+
+.search-user-btn:hover{
+    background-color: white;
+    color:rgb(33,37,41);
+}
+
+.search-user-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    border: 3px solid rgb(13,110,253);
+    height: 100vh;
+    padding: 1rem;
+    
+}
+
+.search-bar-container{
+    width: 50%;
+}

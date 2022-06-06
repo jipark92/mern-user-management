@@ -9,6 +9,7 @@ export default function UpdateModal(props) {
     const [newPhone, setNewPhone] = useState(props.rowDatas.phone)
     const [newGender, setNewGender] = useState(props.rowDatas.gender)
     const [newStatus, setNewStatus] = useState(props.rowDatas.status)
+    const [newDate, setNewDate] = useState(props.rowDatas.date)
 
     const updateBtn = (id) => {
         console.log('clicked update')
@@ -19,7 +20,8 @@ export default function UpdateModal(props) {
             newAge: newAge,
             newPhone: newPhone,
             newGender: newGender,
-            newStatus: newStatus
+            newStatus: newStatus,
+            newDate: newDate
         })
     }
     
@@ -56,6 +58,9 @@ export default function UpdateModal(props) {
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
             </select>
+
+            <label htmlFor='date'>Date</label>
+            <input type='date' name='date' id='date' onChange={(e)=>setNewDate(e.target.value)}/>
             <button className='submit-update-btn' onClick={(e)=>{
                 e.preventDefault()
                 updateBtn(props.rowDatas._id)

@@ -4,7 +4,7 @@ import { AiOutlineUser,AiOutlineMail, AiOutlinePhone,AiOutlineInteraction,AiOutl
 import { TbListNumbers,TbGenderBigender } from "react-icons/tb";
 import { HiStatusOnline, HiOutlineIdentification } from "react-icons/hi";
 import { FaEdit } from "react-icons/fa";
-import UpdateModal from './UpdateModal';
+import UpdateModal from './UpdateUserModal';
 import Axios from 'axios'
 
 export default function Users() {
@@ -20,26 +20,23 @@ export default function Users() {
     const [show , setShow] = useState(false)
     //single data
     const [rowDatas, setRowDatas] = useState([])
-    //render data
 
     useEffect(()=>{
         Axios.get(`http://localhost:3001/`)
         .then(res=>{
-            // let sortedData = res.data.sort((a,b)=>{
-            //     if( a.name < b.name){
-            //         return -1
-            //     }
-            // })
-            // setUserDatas(sortedData)
+            let sortedData = res.data.sort((a,b)=>{
+                if( a.name < b.name){
+                    return -1
+                }
+            })
+            setUserDatas(sortedData)
             setIsLoading(false)
-            setUserDatas(res.data)
             setRenderUserDisplay(renderUsersDatas)
-            // console.log(userDatas)
         })
         .catch(()=>{
             alert('error fetching data')
         })
-    },[isLoading])
+    },[userDatas])
 
     //delete api data
     const deleteBtn = (id) => {
@@ -54,44 +51,6 @@ export default function Users() {
     //modal close 
     const handleClose = () =>{
         setShow(false)
-    }
-
-    //sort name alphabetically
-    const sortAlphabetical = ()=>{
-        console.log('clicked!')
-        let ele = userDatas.sort((a,b)=>{
-            if( a.name < b.name){
-                return -1
-            }
-        })
-
-        let sortedDisplay = ele.map((users,i)=>{
-            return(
-                <tr key={users._id}>
-                <td>{users._id}</td>
-                <td>{users.name}</td>
-                <td>{users.email}</td>
-                <td>{users.age}</td>
-                <td>{users.phone}</td>
-                <td>{users.gender}</td>                            
-                <td>{users.status}</td>
-                <td>{users.date}</td>
-                <td style={{display:'flex', justifyContent:'space-evenly'}}>
-                    <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></li>
-                    <li className='update-btn' onClick={()=>{
-                        setRowDatas(users)
-                        setShow(true)}}><FaEdit/></li>
-                    {show? <UpdateModal
-                    handleClose={handleClose}
-                    rowDatas={rowDatas}
-                    />:""}
-                </td>
-            </tr>
-            )
-        })
-        // console.log(ele)
-        setUserDatas(ele)
-        setRenderUserDisplay(sortedDisplay)
     }
 
     //render display
@@ -120,7 +79,7 @@ export default function Users() {
         )
     })
 
-    const [renderUserDisplay, setRenderUserDisplay] = useState(renderUsersDatas)
+    const [renderUserDisplay, setRenderUserDisplay] = useState()
 
     return (
         <div className="users-container">
@@ -129,7 +88,7 @@ export default function Users() {
                     <tbody>
                         <tr className='table-header-container'>
                             <th>ID<HiOutlineIdentification/></th>
-                            <th><button className='sort-alphabet-btn' onClick={()=>{sortAlphabetical()}}>NAME<AiOutlineUser/></button></th>
+                            <th>NAME<AiOutlineUser/></th>
                             <th>EMAIL<AiOutlineMail/></th>
                             <th>AGE<TbListNumbers/></th>
                             <th>PHONE<AiOutlinePhone/></th>

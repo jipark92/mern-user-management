@@ -1,10 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Button, Form } from 'react-bootstrap';
-
+// import { Button, Form } from 'react-bootstrap';
 
 export default function NavBar() {
-
-
 
     return (
         <header className='title-container'>
@@ -12,16 +9,13 @@ export default function NavBar() {
                 <h1 className='text-light'>User Management</h1>
             </Link>
             <div>
-            {/* <Form>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label></Form.Label>
-                    <Form.Control type="text" placeholder="Search" />
-                </Form.Group>
-            </Form> */}
+                <Link to='/searchuser'>
+                    <button className='search-user-btn'>SEARCH USER</button>
+                </Link>
+                <Link to='/newuser'>
+                    <button className="new-user-btn ">ADD USER</button>
+                </Link>
             </div>
-            <Link to='/newuser'>
-                <button className="new-user-btn ">ADD USER</button>
-            </Link>
         </header>
     )
 }

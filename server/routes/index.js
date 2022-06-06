@@ -16,7 +16,6 @@ router.get('/', async(req,res)=>{
 
 //create(post)
 router.post('/newuser', async (req,res)=>{
-
     const addNewUser = req.body
     const newUser = new UserModel(addNewUser)
     await newUser.save()
@@ -37,6 +36,7 @@ router.put('/updateuser',(req,res)=>{
     const newPhone = req.body.newPhone
     const newGender = req.body.newGender
     const newStatus = req.body.newStatus
+    const newDate = req.body.newDate
     const id = req.body.id
 
     try {
@@ -47,6 +47,7 @@ router.put('/updateuser',(req,res)=>{
             singleUser.phone = Number(newPhone)
             singleUser.gender = newGender
             singleUser.status = newStatus
+            singleUser.date = newDate
             singleUser.save()
         })
     } catch (error) {

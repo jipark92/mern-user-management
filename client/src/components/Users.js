@@ -1,26 +1,24 @@
-import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import Axios from 'axios'
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { AiOutlineUser,AiOutlineMail, AiOutlinePhone,AiOutlineInteraction,AiOutlineLoading3Quarters } from "react-icons/ai";
 import { TbListNumbers,TbGenderBigender } from "react-icons/tb";
 import { HiStatusOnline, HiOutlineIdentification } from "react-icons/hi";
 import { FaEdit } from "react-icons/fa";
-// import UpdateForm from './UpdateForm';
 import UpdateModal from './UpdateModal';
+import Axios from 'axios'
 
 export default function Users() {
-
+    //data
     const [userDatas, setUserDatas] = useState([])
+    //add/delete/update status text
     const [deleteStatus, setDeleteStatus] = useState(false)
     const [addStatus, setAddStatus] = useState(false)
     const [updateStatus, setUpdateStatus] = useState(false)
-
+    //loading screen
     const [isLoading, setIsLoading] = useState(true)
-
+    //open modal
     const [show , setShow] = useState(false)
-    // const [newName, setNewName] = useState('')
-
+    //single data
     const [rowDatas, setRowDatas] = useState([])
 
     useEffect(()=>{
@@ -28,12 +26,6 @@ export default function Users() {
         .then(res=>{
             setUserDatas(res.data)
             setIsLoading(false)
-            if(res.data.length > userDatas.length){
-                setAddStatus(true)
-                setTimeout(() => {
-                    setAddStatus(false)
-                }, 2500);
-            }
         })
         .catch(()=>{
             alert('error fetching data')
@@ -41,41 +33,22 @@ export default function Users() {
         
     },[userDatas])
 
+    //delete api data
     const deleteBtn = (id) => {
         console.log('clicked delete')
         Axios.delete(`http://localhost:3001/deleteuser/${id}`)
         setDeleteStatus(true)
         setTimeout(() => {
             setDeleteStatus(false)
-        }, 1500);
+        }, 2500);
     }
 
-    // const updateBtn = (id) => {
-    //     console.log('clicked update')
-    //     const newName = prompt('enter new name')
-    //     const newEmail = prompt('enter new email')
-    //     const newAge = prompt('enter new age')
-    //     const newPhone = prompt('enter new phone')
-
-    //     if(!newName || !newEmail || !newAge || !newPhone) return
-    //     Axios.put('http://localhost:3001/updateuser',{
-    //         id: id,
-    //         newName: newName,
-    //         newEmail: newEmail,
-    //         newAge: newAge,
-    //         newPhone: newPhone
-    //     })
-    // } 
-
-    // const updateBtn = () =>{
-    //     console.log('update clicked')
-    //     console.log('')
-    // }
-
+    //modal close 
     const handleClose = () =>{
         setShow(false)
     }
 
+    //render display
     const renderUsersDatas = userDatas.map((users,i)=>{
         return (
             <tr key={users._id}>
@@ -87,20 +60,15 @@ export default function Users() {
                 <td>{users.gender}</td>                            
                 <td>{users.status}</td>
                 <td style={{display:'flex', justifyContent:'space-evenly'}}>
-                    <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}} ><RiDeleteBin5Line /></li>
-                    {/* <Link to={`/updateuser/`} style={{textDecoration:"none",color:"rgb(117,119,122)"}}>
-                        <li className='update-btn' ><FaEdit/></li>
-                    </Link> */}
-                    {/* <li  onClick={()=>{
-                        setRowDatas(users)
-                        setShow(true)}} ><FaEdit/></li> */}
+                    <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></li>
                     <li className='update-btn' onClick={()=>{
                         setRowDatas(users)
-                        setShow(true)}} ><FaEdit/></li>
+                        setShow(true)}}><FaEdit/></li>
+
                     {show? <UpdateModal
                     handleClose={handleClose}
                     rowDatas={rowDatas}
-                />:""}
+                    />:""}
                 </td>
             </tr>
         )
@@ -121,7 +89,7 @@ export default function Users() {
                             <th>STATUS<HiStatusOnline/></th>
                             <th>ACTION<AiOutlineInteraction/></th>
                         </tr>
-                        {isLoading? <tr className='loading-container'><td><AiOutlineLoading3Quarters className='loading-icon' /></td></tr>:renderUsersDatas}
+                        {isLoading? <tr className='loading-container'><td><AiOutlineLoading3Quarters className='loading-icon'/></td></tr>:renderUsersDatas}
                     </tbody>
                 </table>
                 <div className='action-status-container'>
@@ -130,12 +98,6 @@ export default function Users() {
                     {updateStatus ? <p style={{color:"blue",fontSize:"1.1rem", fontWeight:"700"}}>USER UPDATED</p>: ""}
                 </div>
             </div>
-            {/* {show?<UpdateForm
-                handleClose={handleClose}
-                // handleUpdate={updateBtn}
-                rowDatas={rowDatas}
-            />:""} */}
-            
             <svg className='footer-bg' xmlns="http://www.w3.org/2000/svg" viewBox="200 25 900 220"><path fill="#273036" fillOpacity="1" d="M0,256L48,218.7C96,181,192,107,288,96C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
         </div>
     )

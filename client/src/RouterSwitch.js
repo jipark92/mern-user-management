@@ -1,7 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import NavBar from './components/NavBar'
 import AddUser from './components/AddUser'
-// import UpdateUser from './components/UpdateUser'
 import Users from './components/Users'
 
 export default function RouterSwitch() {
@@ -11,7 +10,6 @@ export default function RouterSwitch() {
             <Routes>
                 <Route path="/" element={<Users/>}/>
                 <Route path="/newuser" element={<AddUser/>}/>
-                {/* <Route path="/updateuser" element={<UpdateUser/>}/> */}
             </Routes>
         </BrowserRouter>
     )

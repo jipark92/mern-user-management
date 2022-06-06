@@ -3,9 +3,10 @@ import Axios from 'axios'
 import {useState} from 'react'
 
 export default function AddUser() {
-
+    //router-dom redirect
     const navigate = useNavigate()
-
+    
+    //set data values
     const [userName, setUserName] = useState("")
     const [userEmail, setUserEmail] = useState("")
     const [userGender, setUserGender] = useState("Male")
@@ -13,6 +14,7 @@ export default function AddUser() {
     const [userAge, setUserAge] = useState()
     const [userPhone, setUserPhone] = useState()
 
+    //add new user
     const addNewUser = () => {
         Axios.post(`http://localhost:3001/newuser`,{
             name: userName,
@@ -28,18 +30,21 @@ export default function AddUser() {
             <div className="new-users-form-container">
                 <form className='form-container bg-dark text-light'>
                     <div>
-                        <h3>Add New User Form</h3>
+                        <h2>Add New User Form</h2>
                     </div>
                     <div>
                         <label htmlFor="name">Name</label>
                         <input type="text" name='name' id='name' onChange={(e)=>setUserName(e.target.value)} required/>
+                        
                         <label htmlFor="email">Email</label>
                         <input type="email" name='email' id='email' onChange={(e)=>setUserEmail(e.target.value)} required/>
+                        
                         <label htmlFor="age">Age</label>
                         <input type='number' name='age' id='age' onChange={(e)=>{
                             setUserAge(e.target.value)
                             if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength)
                             }} maxLength="3" required/>
+                        
                         <label htmlFor="phone">Phone</label>
                         <input type='number' name='phone' id='phone' maxLength="10"  onChange={(e)=>{
                             setUserPhone(e.target.value)
@@ -52,6 +57,7 @@ export default function AddUser() {
                             <option value="Male" >Male</option>
                             <option value="Female">Female</option>
                         </select>
+                        
                         <label htmlFor="status">Status</label>
                         <select name='status' id='status' onChange={(e)=>setUserStatus(e.target.value)}>
                             <option value="Active">Active</option>

@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './css/users.css';
 import App from './App';
+import './css/users.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/addUsers.css'
-// import './css/updateForm.css'
-// import './css/updateUser.css'
 import './css/updateModal.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

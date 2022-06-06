@@ -133,6 +133,10 @@ tr:nth-child(even){
   color: white;
 }
 
+.sort-alphabet-btn:hover{
+  /* cursor: none; */
+}
+
 @keyframes spin {
   from {
       transform: rotate(0deg);

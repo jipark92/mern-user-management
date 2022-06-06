@@ -13,6 +13,7 @@ export default function AddUser() {
     const [userStatus, setUserStatus ] = useState("Active")
     const [userAge, setUserAge] = useState()
     const [userPhone, setUserPhone] = useState()
+    const [userDate, setUserDate] = useState('')
 
     //add new user
     const addNewUser = () => {
@@ -22,7 +23,8 @@ export default function AddUser() {
             age: userAge,
             phone: userPhone,
             gender: userGender,
-            status: userStatus
+            status: userStatus,
+            date: userDate
         })
     }
 
@@ -50,6 +52,9 @@ export default function AddUser() {
                             setUserPhone(e.target.value)
                             if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength)
                             }} required/>
+
+                        <label htmlFor='date'>Date</label>
+                        <input type='date' name='date' id='date' onChange={(e)=>setUserDate(e.target.value)}/>
                     </div>
                     <div>
                         <label htmlFor="gender">Gender</label>

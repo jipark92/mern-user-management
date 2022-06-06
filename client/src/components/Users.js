@@ -24,12 +24,20 @@ export default function Users() {
     useEffect(()=>{
         Axios.get(`http://localhost:3001/`)
         .then(res=>{
-            setUserDatas(res.data)
+
+            let sortedData = res.data.sort((a,b)=>{
+                if( a.name < b.name){
+                    return -1
+                }
+            })
+            setUserDatas(sortedData)
+            
             setIsLoading(false)
         })
         .catch(()=>{
             alert('error fetching data')
         })
+
         
     },[userDatas])
 
@@ -48,6 +56,30 @@ export default function Users() {
         setShow(false)
     }
 
+    //
+    // const sortAlphabetical = ()=>{
+    //     console.log('clicked!')
+    //     let ele = userDatas.sort((a,b)=>{
+    //         if( a.name < b.name){
+    //             return -1
+    //         }
+        
+    //     })
+    //     console.log(ele)
+    //     setUserDatas(ele)
+    //     console.log(userDatas)
+    // }
+
+    //grab date
+    const getDate =() =>{
+        let currentDate = new Date();
+        let cDay = currentDate.getDate();
+        let cMonth = currentDate.getMonth() + 1;
+        let cYear = currentDate.getFullYear();
+        
+        return cDay + "/" + cMonth + "/" + cYear 
+    }
+
     //render display
     const renderUsersDatas = userDatas.map((users,i)=>{
         return (
@@ -59,12 +91,12 @@ export default function Users() {
                 <td>{users.phone}</td>
                 <td>{users.gender}</td>                            
                 <td>{users.status}</td>
+                <td>{users.date}</td>
                 <td style={{display:'flex', justifyContent:'space-evenly'}}>
                     <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></li>
                     <li className='update-btn' onClick={()=>{
                         setRowDatas(users)
                         setShow(true)}}><FaEdit/></li>
-
                     {show? <UpdateModal
                     handleClose={handleClose}
                     rowDatas={rowDatas}
@@ -79,14 +111,15 @@ export default function Users() {
             <div className="users-info-container">
                 <table style={{width: "100%"}}>
                     <tbody>
-                        <tr className='bg-dark text-light'>
+                        <tr className='table-header-container'>
                             <th>ID<HiOutlineIdentification/></th>
-                            <th>NAME <AiOutlineUser/></th>
+                            <th>NAME<AiOutlineUser/></th>
                             <th>EMAIL<AiOutlineMail/></th>
                             <th>AGE<TbListNumbers/></th>
                             <th>PHONE<AiOutlinePhone/></th>
                             <th>GENDER<TbGenderBigender/></th>
                             <th>STATUS<HiStatusOnline/></th>
+                            <th>DATE ADDED</th>
                             <th>ACTION<AiOutlineInteraction/></th>
                         </tr>
                         {isLoading? <tr className='loading-container'><td><AiOutlineLoading3Quarters className='loading-icon'/></td></tr>:renderUsersDatas}

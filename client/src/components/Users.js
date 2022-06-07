@@ -4,6 +4,7 @@ import { AiOutlineUser,AiOutlineMail, AiOutlinePhone,AiOutlineInteraction,AiOutl
 import { TbListNumbers,TbGenderBigender } from "react-icons/tb";
 import { HiStatusOnline, HiOutlineIdentification } from "react-icons/hi";
 import { FaEdit } from "react-icons/fa";
+import {BsCalendarDate} from "react-icons/bs";
 import UpdateModal from './UpdateUserModal';
 import Axios from 'axios'
 
@@ -94,7 +95,7 @@ export default function Users() {
                             <th>PHONE<AiOutlinePhone/></th>
                             <th>GENDER<TbGenderBigender/></th>
                             <th>STATUS<HiStatusOnline/></th>
-                            <th>DATE ADDED</th>
+                            <th>DATE ADDED<BsCalendarDate/></th>
                             <th>ACTION<AiOutlineInteraction/></th>
                         </tr>
                         {isLoading? <tr className='loading-container'><td><AiOutlineLoading3Quarters className='loading-icon'/></td></tr>:renderUserDisplay}

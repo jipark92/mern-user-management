@@ -4,7 +4,6 @@ import AddUser from './components/AddUser'
 import Users from './components/Users'
 import SearchUser from './components/SearchUser'
 
-
 export default function RouterSwitch() {
     return (
         <BrowserRouter>

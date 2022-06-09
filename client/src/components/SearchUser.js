@@ -7,33 +7,35 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
 import {useState,useEffect} from 'react'
 import  Axios  from 'axios';
+import UpdateModal from './UpdateUserModal';
 
 function SearchUser() {
 
     const [searchUser, setSearchUser] = useState()
     const [userDatas, setUserDatas] = useState([])
+    const [rowDatas, setRowDatas] = useState([])
+    const [show , setShow] = useState(false)
 
     useEffect(()=>{
         Axios.get('http://localhost:3001/')
         .then(res=>{
             setUserDatas(res.data)
-                        setRenderUser(filterDisplay)
-
-            // console.log(userDatas)
+            setRenderUser(filterDisplay)
         })
-    },[searchUser])
+    },[searchUser, userDatas])
 
-    //search user
-    // const searchUserBtn = () =>{
-    //     // console.log('clicked search')
-    //     Axios.get('http://localhost:3001/')
-    //     .then(res=>{
-    //         setUserDatas(res.data)
-    //         console.log(userDatas)
-    //         setRenderUser(filterDisplay)
-    //     })
-    // }
+    //delete api data
+    const deleteBtn = (id) => {
+        console.log('clicked delete')
+        Axios.delete(`http://localhost:3001/deleteuser/${id}`)
+    }
 
+    //modal close 
+    const handleClose = () =>{
+        setShow(false)
+    }
+
+    //filter 
     const filterDisplay = userDatas.filter((users,i)=>{
         if(searchUser === ""){
             return users
@@ -52,14 +54,14 @@ function SearchUser() {
                 <td>{users.status}</td>
                 <td>{users.date}</td>
                 <td style={{display:'flex', justifyContent:'space-evenly'}}>
-                    {/* <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></li>
+                    <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></li>
                     <li className='update-btn' onClick={()=>{
                         setRowDatas(users)
                         setShow(true)}}><FaEdit/></li>
                     {show? <UpdateModal
                     handleClose={handleClose}
                     rowDatas={rowDatas}
-                    />:""} */}
+                    />:""}
                 </td>
             </tr>
         )

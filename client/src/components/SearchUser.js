@@ -10,41 +10,73 @@ import  Axios  from 'axios';
 
 function SearchUser() {
 
-    const [inputValue, setInputValue] = useState()
+    const [searchUser, setSearchUser] = useState()
     const [userDatas, setUserDatas] = useState([])
-
-    const searchBtn = ()=>{
-        console.log('search clicked')
-    }
 
     useEffect(()=>{
         Axios.get('http://localhost:3001/')
         .then(res=>{
             setUserDatas(res.data)
-            console.log(userDatas)
-        })
-    },[])
+                        setRenderUser(filterDisplay)
 
-    const filterDisplay = userDatas.map((user,i)=>{
+            // console.log(userDatas)
+        })
+    },[searchUser])
+
+    //search user
+    // const searchUserBtn = () =>{
+    //     // console.log('clicked search')
+    //     Axios.get('http://localhost:3001/')
+    //     .then(res=>{
+    //         setUserDatas(res.data)
+    //         console.log(userDatas)
+    //         setRenderUser(filterDisplay)
+    //     })
+    // }
+
+    const filterDisplay = userDatas.filter((users,i)=>{
+        if(searchUser === ""){
+            return users
+        } else if (users.name.includes(searchUser) ){
+            return users
+        }
+    }).map((users,i)=>{
         return (
-            <div>
-                <p>hello {user.name}</p>
-            </div>
+            <tr key={users._id}>
+                <td>{users._id}</td>
+                <td>{users.name}</td>
+                <td>{users.email}</td>
+                <td>{users.age}</td>
+                <td>{users.phone}</td>
+                <td>{users.gender}</td>                            
+                <td>{users.status}</td>
+                <td>{users.date}</td>
+                <td style={{display:'flex', justifyContent:'space-evenly'}}>
+                    {/* <li className='delete-btn' onClick={()=>{deleteBtn(users._id)}}><RiDeleteBin5Line /></li>
+                    <li className='update-btn' onClick={()=>{
+                        setRowDatas(users)
+                        setShow(true)}}><FaEdit/></li>
+                    {show? <UpdateModal
+                    handleClose={handleClose}
+                    rowDatas={rowDatas}
+                    />:""} */}
+                </td>
+            </tr>
         )
     })
 
+    const [renderUser, setRenderUser] = useState()
+
     return (
         <div className="search-user-container">
-            {filterDisplay}
-
             <h2>SEARCH USER</h2>
             <div className='search-bar-container'>
-                <Form.Control size="lg" type="text" placeholder="Search user..." onChange={(e)=>{
-                    setInputValue(e.target.value)
-                    console.log(inputValue)
+                <Form.Control size="lg" type="text" placeholder="Search user..." name="searchuser" defaultValue={searchUser} onChange={(e)=>{
+                    setSearchUser(e.target.value)
+                    console.log(searchUser)
                     }}/>
                 <div className="d-grid gap-2">
-                    <Button variant="primary" size="lg" onClick={searchBtn}>
+                    <Button variant="primary" size="lg" >
                         Search
                     </Button>
                 </div>
@@ -63,7 +95,7 @@ function SearchUser() {
                             <th>DATE ADDED <BsCalendarDate/></th>
                             <th>ACTION<AiOutlineInteraction/></th>
                         </tr>
-                        {/* <tr className='loading-container'><td><AiOutlineLoading3Quarters className='loading-icon'/></td></tr> */}
+                        {renderUser}
                     </tbody>
                 </table>
         </div>

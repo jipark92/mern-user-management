@@ -9,26 +9,11 @@ router.get('/', async(req,res)=>{
     UserModel.find({},(err,result)=>{
         try {
             res.json(result)
-            // console.log(result)
         } catch (err) {
             res.send(err)
         }
     })
 })
-
-//read search user
-// router.get('/searchuser', async(req,res)=>{
-//     const searchedUser = req.body.searchuser
-//     console.log(req.body.searchuser)
-//     UserModel.find({ name : searchedUser},(err,result)=>{
-//         try {
-//             res.send(result)
-//             console.log(result)
-//         } catch (errrr) {
-//             res.send(err)
-//         }
-//     })
-// })
 
 //create(post)
 router.post('/newuser', async (req,res)=>{

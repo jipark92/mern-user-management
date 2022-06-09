@@ -8,11 +8,29 @@ router.get('/', async(req,res)=>{
     UserModel.find({},(err,result)=>{
         try {
             res.json(result)
+            console.log(result)
         } catch (err) {
             res.send(err)
         }
     })
 })
+
+//read search user
+// router.get('/searchuser', async(req,res)=>{
+
+//     const searchedUser = req.body.searchuser
+//     console.log(req.body.searchuser)
+
+
+//     UserModel.find({ name : searchedUser},(err,result)=>{
+//         try {
+//             res.send(result)
+//             console.log(result)
+//         } catch (errrr) {
+//             res.send(err)
+//         }
+//     })
+// })
 
 //create(post)
 router.post('/newuser', async (req,res)=>{
@@ -40,15 +58,15 @@ router.put('/updateuser',(req,res)=>{
     const id = req.body.id
 
     try {
-            UserModel.findById(id,(err,singleUser)=>{
-            singleUser.name = newName
-            singleUser.email = newEmail
-            singleUser.age = Number(newAge)
-            singleUser.phone = Number(newPhone)
-            singleUser.gender = newGender
-            singleUser.status = newStatus
-            singleUser.date = newDate
-            singleUser.save()
+        UserModel.findById(id,(err,singleUser)=>{
+        singleUser.name = newName
+        singleUser.email = newEmail
+        singleUser.age = Number(newAge)
+        singleUser.phone = Number(newPhone)
+        singleUser.gender = newGender
+        singleUser.status = newStatus
+        singleUser.date = newDate
+        singleUser.save()
         })
     } catch (error) {
         console.log('error')

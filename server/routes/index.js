@@ -1,5 +1,6 @@
 let express = require('express')
 let router = express.Router()
+
 //models/schema
 let UserModel = require('../models/Users')
 
@@ -8,7 +9,7 @@ router.get('/', async(req,res)=>{
     UserModel.find({},(err,result)=>{
         try {
             res.json(result)
-            console.log(result)
+            // console.log(result)
         } catch (err) {
             res.send(err)
         }
@@ -17,11 +18,8 @@ router.get('/', async(req,res)=>{
 
 //read search user
 // router.get('/searchuser', async(req,res)=>{
-
 //     const searchedUser = req.body.searchuser
 //     console.log(req.body.searchuser)
-
-
 //     UserModel.find({ name : searchedUser},(err,result)=>{
 //         try {
 //             res.send(result)

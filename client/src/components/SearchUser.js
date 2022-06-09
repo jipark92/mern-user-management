@@ -77,11 +77,6 @@ function SearchUser() {
                     setSearchUser(e.target.value)
                     console.log(searchUser)
                     }}/>
-                <div className="d-grid gap-2">
-                    <Button variant="primary" size="lg" >
-                        Search
-                    </Button>
-                </div>
             </div>
 
             <table style={{width: "100%"}}>
